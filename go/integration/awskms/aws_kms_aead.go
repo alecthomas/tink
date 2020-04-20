@@ -78,7 +78,7 @@ func (a *AWSAEAD) Decrypt(ciphertext, additionalData []byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if strings.Compare(*resp.KeyId, a.keyURI) != 0 {
+	if strings.Compare(aws.StringValue(resp.KeyId), a.keyURI) != 0 {
 		return nil, errors.New("decryption failed: wrong key id")
 	}
 	return resp.Plaintext, nil
